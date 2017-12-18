@@ -28,14 +28,14 @@ node {
             try {
                 def deploySettings = getDeploySettings()
 				sh "chmod 755 *.sh"
-                sh './preparations.sh'
+                sh "./preparations.sh ${deploySettings} ${mvnHome}"
             } catch(err) {
                 println(err.getMessage());
                 throw err
             }
         }
         stage('Build') {
-            sh "./Build.sh"
+            sh "./Build.sh ${mvnHome}"
         }
 		stage('Results') {
 		    sh "./Results.sh"

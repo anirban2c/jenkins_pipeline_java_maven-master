@@ -1,1 +1,1 @@
-${mvnHome}/bin/mvn -Dmaven.test.failure.ignore clean package
+$1/bin/mvn -Dmaven.test.failure.ignore clean package
