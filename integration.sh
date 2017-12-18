@@ -1,0 +1,1 @@
+echo "You built your integration testing project logic using this script!"

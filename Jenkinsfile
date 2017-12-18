@@ -38,29 +38,32 @@ node {
             sh "./Build.sh ${mvnHome}"
         }
 		stage('Results') {
-		    sh "./Results.sh"
+		
+		    junit '**/target/surefire-reports/TEST-*.xml'
+			archive 'target/*.jar'
+			
 	   }
         stage ('Tests') {                
             parallel 'static': {
-                sh "bin/grumphp run --testsuite=magento2testsuite"
+                sh "./static.sh"
             },
             'unit': {
-                sh "magento/bin/magento dev:test:run unit"
+                sh "./unit.sh"
             },
             'integration': {
-                sh "magento/bin/magento dev:test:run integration"
+                sh "./integration.sh"
             }
         }
         if (deploySettings) {
             stage ('Deploy') {
                 if (deploySettings.type && deploySettings.version) {
                     // Deploy specific version to a specifc server (IGR or PRD)
-                    sh "mg2-builder release:finish -Drelease.type=${deploySettings.type} -Drelease.version=${deploySettings.version}"
-                    sh "ssh ${deploySettings.ssh} 'mg2-deployer release -Drelease.version=${deploySettings.version}'"
+                    sh "ssh ${deploySettings.ssh} "
                     notifyDeployedVersion(deploySettings.version)
                 } else {
                     // Deploy to develop branch into IGR server
-                    sh "ssh ${deploySettings.ssh} 'mg2-deployer release'"
+                    sh "ssh localhost"
+					notifyDeployedVersion("Master Latest Build")
                 }
             }
         }
