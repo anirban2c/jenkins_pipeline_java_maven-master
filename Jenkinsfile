@@ -28,6 +28,7 @@ node {
             try {
                 def deploySettings = getDeploySettings()
 				sh "chmod 755 *.sh"
+				echo "DEPLOYED VERSION '${version}': Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]': Check console output at '${env.BUILD_URL}' [${env.BUILD_NUMBER}]"
                 sh "./preparations.sh ${deploySettings} ${mvnHome}"
             } catch(err) {
                 println(err.getMessage());
