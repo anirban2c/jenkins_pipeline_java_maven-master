@@ -27,6 +27,7 @@ node {
         stage ('preparations') {
             try {
                 def deploySettings = getDeploySettings()
+				sh "chmod 755 *.sh"
                 sh './preparations.sh'
             } catch(err) {
                 println(err.getMessage());
