@@ -67,7 +67,8 @@ node {
                     notifyDeployedVersion(deploySettings.version)
                 } else {
                     // Deploy to develop branch into IGR server
-                    sh "ssh localhost"
+                   // sh "ssh localhost"
+					echo "DEPLOYED VERSION : Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]': Check console output at '${env.BUILD_URL}' [${env.BUILD_NUMBER}]"
 					notifyDeployedVersion("Master Latest Build")
                 }
             }
