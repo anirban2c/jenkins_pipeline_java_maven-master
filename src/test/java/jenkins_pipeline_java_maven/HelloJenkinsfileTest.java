@@ -10,7 +10,7 @@ public class HelloJenkinsfileTest {
 
 	@Test
 	public void test() {
-		assertEquals("HelloJenkinsfile", new HelloJenkinsfile().go());
-	}
+		assertEquals("Hello Jenkins file", new HelloJenkinsfile().go());
+	} 
 
 }
