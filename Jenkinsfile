@@ -28,7 +28,7 @@ node {
 			withSonarQubeEnv('Sonar') {
 			  // requires SonarQube Scanner for Maven 3.2+
 			 // sh "${mvnHome}/bin/mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar"
-			  sh "${mvnHome}/bin/mvnmvn clean package sonar:sonar"
+			  sh "${mvnHome}/bin/mvn clean package sonar:sonar"
 			}
 		  }
 		stage("Quality Gate"){
