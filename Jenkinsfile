@@ -25,7 +25,7 @@ node {
 			git url: 'https://github.com/subrata-mettle/jenkins_pipeline_java_maven-master.git'
         }
 		stage('SonarQube analysis') {
-			withSonarQubeEnv('My SonarQube Server') {
+			withSonarQubeEnv('Sonar') {
 			  // requires SonarQube Scanner for Maven 3.2+
 			  sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
 			}
