@@ -106,7 +106,7 @@ def isValidDeployBranch() {
 
 def getBranchDetails() {
     def branchDetails = [:]
-    branchData = ${env.BRANCH_NAME}.split('/')
+    branchData = BRANCH_NAME.split('/')
     if (branchData.size() == 2) {
         branchDetails['type'] = branchData[0]
         branchDetails['version'] = branchData[1]
@@ -117,7 +117,7 @@ def getBranchDetails() {
 
 def getDeploySettings() {
     def deploySettings = [:]
-    if (${env.BRANCH_NAME} == 'master') { 
+    if (BRANCH_NAME == 'master') { 
         deploySettings['ssh'] = "masteruser@domain-igr.com"
     } else if (params.deployServer && params.deployServer != 'none') {
         branchDetails = getBranchDetails()
