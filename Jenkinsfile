@@ -22,7 +22,7 @@ node {
 				
 			checkout scm
 			
-			git url: 'https://github.com/subrata-mettle/jenkins_pipeline_java_maven-master.git'
+			git url: 'https://github.com/anirban2c/jenkins_pipeline_java_maven-master.git'
         }
 		stage('SonarQube analysis') {
 			withSonarQubeEnv('Sonar') {
@@ -106,7 +106,7 @@ def isValidDeployBranch() {
 
 def getBranchDetails() {
     def branchDetails = [:]
-    branchData = BRANCH_NAME.split('/')
+    branchData = ${env.BRANCH_NAME}.split('/')
     if (branchData.size() == 2) {
         branchDetails['type'] = branchData[0]
         branchDetails['version'] = branchData[1]
@@ -117,7 +117,7 @@ def getBranchDetails() {
 
 def getDeploySettings() {
     def deploySettings = [:]
-    if (BRANCH_NAME == 'master') { 
+    if (${env.BRANCH_NAME} == 'master') { 
         deploySettings['ssh'] = "masteruser@domain-igr.com"
     } else if (params.deployServer && params.deployServer != 'none') {
         branchDetails = getBranchDetails()
